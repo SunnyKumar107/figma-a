@@ -3,6 +3,8 @@ import LoginPage from './components/login-page'
 import Home from './components/home'
 import { userContext } from './context/context'
 import { useEffect, useState } from 'react'
+import Register from './components/register-page'
+import usersService from './services/users'
 
 export default function App() {
   const [user, setUser] = useState(null)
@@ -10,7 +12,9 @@ export default function App() {
   useEffect(() => {
     const user = localStorage.getItem('loggedUser')
     if (user) {
-      setUser(JSON.parse(user))
+      const loginUser = JSON.parse(user)
+      setUser(loginUser)
+      usersService.setToken(loginUser.token)
     }
   }, [])
 
@@ -19,7 +23,8 @@ export default function App() {
       <userContext.Provider value={{ user, setUser }}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/sign-in" element={<LoginPage />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </userContext.Provider>
     </Router>

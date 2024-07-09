@@ -9,13 +9,13 @@ export default function Home() {
   console.log('home', user)
   useEffect(() => {
     if (!user) {
-      navigate('/login')
+      navigate('/sign-in')
     }
   }, [])
 
   const handleLogout = () => {
     window.localStorage.removeItem('loggedUser')
-    navigate('/login')
+    navigate('/sign-in')
   }
 
   if (!user) return null
