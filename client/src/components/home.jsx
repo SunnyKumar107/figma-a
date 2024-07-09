@@ -1,20 +1,22 @@
 import { useContext, useEffect } from 'react'
 import { userContext } from '../context/context'
 import { useNavigate } from 'react-router-dom'
+import { googleLogout } from '@react-oauth/google'
 
 export default function Home() {
-  const { user } = useContext(userContext)
+  const { user, setUser } = useContext(userContext)
   const navigate = useNavigate()
 
-  console.log('home', user)
   useEffect(() => {
     if (!user) {
       navigate('/sign-in')
     }
   }, [])
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    setUser(null)
     window.localStorage.removeItem('loggedUser')
+    googleLogout()
     navigate('/sign-in')
   }
 
@@ -30,7 +32,7 @@ export default function Home() {
         className="mt-4 bg-slate-900 text-white rounded-lg p-2"
         onClick={handleLogout}
       >
-        Logout
+        Log out
       </button>
     </div>
   )

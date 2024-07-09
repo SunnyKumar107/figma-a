@@ -6,6 +6,7 @@ import { userContext } from '../context/context'
 import loginService from '../services/auth'
 import usersService from '../services/users'
 import { LuLoader2 } from 'react-icons/lu'
+import { jwtDecode } from 'jwt-decode'
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
@@ -98,8 +99,16 @@ export default function LoginPage() {
         </div>
         <div className="flex justify-center">
           <GoogleLogin
+            shape="circle"
+            text=""
             onSuccess={(credentialResponse) => {
-              console.log(credentialResponse)
+              const decoded = jwtDecode(credentialResponse.credential)
+              setUser({
+                email: decoded.email,
+                name: decoded.name,
+                token: credentialResponse.credential
+              })
+              navigate('/')
             }}
             onError={() => {
               console.log('Login Failed')
