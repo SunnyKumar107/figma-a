@@ -1,9 +1,27 @@
-import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import LoginPage from './components/login-page'
+import Home from './components/home'
+import { userContext } from './context/context'
+import { useEffect, useState } from 'react'
 
 export default function App() {
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const user = localStorage.getItem('loggedUser')
+    if (user) {
+      setUser(JSON.parse(user))
+    }
+  }, [])
+
   return (
-    <div className="h-screen flex items-center justify-center">
-      <h1 className="text-3xl font-bold text-orange-400">Hello world</h1>
-    </div>
+    <Router>
+      <userContext.Provider value={{ user, setUser }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
+      </userContext.Provider>
+    </Router>
   )
 }
