@@ -3,6 +3,7 @@ const usersRouter = require('express').Router()
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
 const middleware = require('../utils/middleware')
+const jwt = require('jsonwebtoken')
 
 usersRouter.get('/', async (request, response) => {
   try {
@@ -59,7 +60,19 @@ usersRouter.post('/', async (request, response, next) => {
     })
 
     const savedUser = await newUser.save()
-    response.status(201).json(savedUser)
+
+    const userForToken = { email: savedUser.email, id: savedUser._id }
+
+    const token = jwt.sign(userForToken, process.env.SECRET_KEY, {
+      expiresIn: 60 * 60
+    })
+
+    response.status(201).json({
+      id: savedUser.id,
+      email: savedUser.email,
+      name: savedUser.name,
+      token
+    })
   } catch (exception) {
     next(exception)
   }
