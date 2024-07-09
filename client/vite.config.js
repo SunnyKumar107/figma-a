@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': { target: 'http://localhost:3000', changeOrigin: true }
+      '/api': { target: 'https://figma-a.onrender.com', changeOrigin: true }
     }
   }
 })
