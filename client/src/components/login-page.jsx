@@ -68,7 +68,7 @@ export default function LoginPage() {
               id="email"
               name="email"
               placeholder="Enter Email"
-              className="border border-gray-200 rounded-lg p-2 text-sm"
+              className="border border-gray-200 rounded-lg p-4 text-sm"
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -79,7 +79,7 @@ export default function LoginPage() {
                 id="password"
                 name="password"
                 placeholder="Password"
-                className="border border-gray-200 rounded-lg p-2 text-sm w-full"
+                className="border border-gray-200 rounded-lg p-4 text-sm w-full"
               />
               <button
                 type="button"
@@ -119,7 +119,6 @@ export default function LoginPage() {
         <div className="flex justify-center">
           <GoogleLogin
             shape="circle"
-            text=""
             onSuccess={(credentialResponse) => {
               const decoded = jwtDecode(credentialResponse.credential)
               setUser({
