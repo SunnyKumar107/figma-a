@@ -1,16 +1,22 @@
 import { GoogleLogin } from '@react-oauth/google'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { LuLoader2 } from 'react-icons/lu'
-import { Link, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import usersService from '../services/users'
 import { userContext } from '../context/context'
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false)
   const [pending, setPending] = useState(false)
-  const { setUser } = useContext(userContext)
+  const { user, setUser } = useContext(userContext)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (user) {
+      navigate('/')
+    }
+  }, [])
 
   const handleRegister = async (e) => {
     e.preventDefault()
@@ -35,7 +41,7 @@ export default function Register() {
     <main className="min-h-screen flex justify-center md:py-2 bg-[#F9FAFB]">
       <div className="w-full md:w-[375px] px-6 py-10 md:py-6 bg-[#FFFFFF] rounded-lg shadow">
         <div className="max-w-[320px]">
-          <h1 className="text-4xl font-medium">Create your new account.</h1>
+          <h1 className="text-4xl font-bold">Create your new account.</h1>
           <p className="text-sm text-gray-500 mt-2">
             Create an account to start looking for the food you like
           </p>
@@ -72,6 +78,7 @@ export default function Register() {
                 className="border border-gray-200 rounded-lg p-2 text-sm w-full"
               />
               <button
+                type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-2 top-2.5"
               >
@@ -91,10 +98,10 @@ export default function Register() {
           </div>
           <button
             type="submit"
-            className="bg-[#FE8C00] text-white rounded-full p-2 font-medium hover:bg-[#FE8C00]/80"
+            className="bg-[#FE8C00] text-white rounded-full p-4 text-sm font-semibold hover:bg-[#FE8C00]/80"
           >
             {pending ? (
-              <LuLoader2 size={24} className="animate-spin m-auto" />
+              <LuLoader2 size={20} className="animate-spin m-auto" />
             ) : (
               'Register'
             )}
@@ -116,12 +123,12 @@ export default function Register() {
         <div className="text-center mt-6">
           <p className="text-sm">
             Have an account?{' '}
-            <Link
-              href="/sign-in"
+            <NavLink
+              to={'/sign-in'}
               className="text-[#FE8C00] hover:text-[#FE8C00]/80 font-medium"
             >
               Sign in
-            </Link>
+            </NavLink>
           </p>
         </div>
       </div>

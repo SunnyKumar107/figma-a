@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = '/api/users'
+const baseUrl = 'https://figma-a.onrender.com/api/users'
 
 let token = null
 
