@@ -17,11 +17,15 @@ const config = () => {
 const register = async (user) => {
   try {
     const response = await axios.post(baseUrl, user)
-    console.log(response.data)
-    return response.data
+    return {
+      success: true,
+      user: response.data
+    }
   } catch (error) {
-    console.log(error)
-    throw new Error('Registration failed')
+    return {
+      success: false,
+      error: error.response.data.error || 'Something went wrong'
+    }
   }
 }
 

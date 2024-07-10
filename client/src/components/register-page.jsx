@@ -5,10 +5,12 @@ import { LuLoader2 } from 'react-icons/lu'
 import { NavLink, useNavigate } from 'react-router-dom'
 import usersService from '../services/users'
 import { userContext } from '../context/context'
+import { RiErrorWarningLine } from 'react-icons/ri'
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false)
   const [pending, setPending] = useState(false)
+  const [error, setError] = useState(null)
   const { user, setUser } = useContext(userContext)
   const navigate = useNavigate()
 
@@ -18,6 +20,13 @@ export default function Register() {
     }
   }, [])
 
+  const showError = (msg) => {
+    setError(msg)
+    setTimeout(() => {
+      setError(null)
+    }, 3000)
+  }
+
   const handleRegister = async (e) => {
     e.preventDefault()
 
@@ -26,15 +35,18 @@ export default function Register() {
     const password = e.target.password.value
 
     setPending(true)
-    const registerUser = await usersService.register({ email, name, password })
+    const res = await usersService.register({ email, name, password })
     setPending(false)
 
-    if (registerUser) {
-      setUser(registerUser)
-      usersService.setToken(registerUser.token)
-      window.localStorage.setItem('loggedUser', JSON.stringify(registerUser))
+    if (res.success) {
+      setUser(res.user)
+      usersService.setToken(res.user.token)
+      window.localStorage.setItem('loggedUser', JSON.stringify(res.user))
       navigate('/')
+      return
     }
+
+    showError(res.error)
   }
 
   return (
@@ -96,6 +108,12 @@ export default function Register() {
               <span className="text-[#FE8C00] mx-1">Privacy Policy</span>
             </p>
           </div>
+          {error && (
+            <div className="flex gap-1 items-center text-red-600">
+              <RiErrorWarningLine strokeWidth={1.5} />
+              <p className="text-sm">{error}</p>
+            </div>
+          )}
           <button
             type="submit"
             className="bg-[#FE8C00] text-white rounded-full p-4 text-sm font-semibold hover:bg-[#FE8C00]/80"

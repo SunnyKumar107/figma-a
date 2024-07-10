@@ -5,9 +5,12 @@ const baseUrl = 'https://figma-a.onrender.com/api/login'
 const login = async (credentials) => {
   try {
     const response = await axios.post(baseUrl, credentials)
-    return response.data
+    return { success: true, user: response.data }
   } catch (error) {
-    throw new Error('Login failed')
+    return {
+      success: false,
+      error: error.response.data.error || 'Something went wrong'
+    }
   }
 }
 

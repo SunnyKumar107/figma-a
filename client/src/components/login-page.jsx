@@ -7,10 +7,12 @@ import loginService from '../services/auth'
 import usersService from '../services/users'
 import { LuLoader2 } from 'react-icons/lu'
 import { jwtDecode } from 'jwt-decode'
+import { RiErrorWarningLine } from 'react-icons/ri'
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [pending, setPending] = useState(false)
+  const [error, setError] = useState(null)
   const { user, setUser } = useContext(userContext)
   const navigate = useNavigate()
 
@@ -20,6 +22,13 @@ export default function LoginPage() {
     }
   }, [])
 
+  const showError = (msg) => {
+    setError(msg)
+    setTimeout(() => {
+      setError(null)
+    }, 3000)
+  }
+
   const handleLogin = async (e) => {
     e.preventDefault()
 
@@ -27,16 +36,19 @@ export default function LoginPage() {
     const password = e.target.password.value
 
     setPending(true)
-    const loginUser = await loginService.login({ email, password })
+    const res = await loginService.login({ email, password })
 
     setPending(false)
 
-    if (loginUser) {
-      setUser(loginUser)
-      usersService.setToken(loginUser.token)
-      window.localStorage.setItem('loggedUser', JSON.stringify(loginUser))
+    if (res.success) {
+      setUser(res.user)
+      usersService.setToken(res.user.token)
+      window.localStorage.setItem('loggedUser', JSON.stringify(res.user))
       navigate('/')
+      return
     }
+
+    showError(res.error)
   }
 
   return (
@@ -84,6 +96,12 @@ export default function LoginPage() {
           >
             Forgot password?
           </NavLink>
+          {error && (
+            <div className="flex gap-1 items-center text-red-600">
+              <RiErrorWarningLine strokeWidth={1.5} />
+              <p className="text-sm">{error}</p>
+            </div>
+          )}
           <button
             type="submit"
             className="bg-[#FE8C00] text-white rounded-full p-4 text-sm font-semibold hover:bg-[#FE8C00]/80"
