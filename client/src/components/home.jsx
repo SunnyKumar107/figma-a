@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { userContext } from '../context/context'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { FaCheck } from 'react-icons/fa'
 
 const Home = () => {
@@ -39,9 +39,12 @@ const Home = () => {
             Login Successful
           </h1>
         </div>
-        <button className="bg-[#FE8C00] w-full text-white rounded-[100px] p-4 text-sm font-semibold hover:bg-[#FE8C00]/80 h-[52px]">
+        <NavLink
+          to="/tracking-screen"
+          className="bg-[#FE8C00] w-full text-center text-white rounded-[100px] p-4 text-sm font-semibold hover:bg-[#FE8C00]/80 h-[52px]"
+        >
           Go to Tracking Screen
-        </button>
+        </NavLink>
         <button
           className="text-sm font-semibold text-[#878787] hover:text-[#878787]/80 mt-4"
           onClick={handleLogout}

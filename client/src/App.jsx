@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import Register from './components/register-page'
 import usersService from './services/users'
 import Home from './components/home'
+import TrackingScreen from './components/tracking-screen'
 
 export default function App() {
   const [user, setUser] = useState(null)
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/sign-in" element={<LoginPage />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/tracking-screen" element={<TrackingScreen />} />
         </Routes>
       </userContext.Provider>
     </Router>
