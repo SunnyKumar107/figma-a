@@ -52,10 +52,10 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-2 bg-[#F9FAFB]">
+    <main className="min-h-screen flex items-center justify-center p-2 bg-[#F9FAFB] font-inter">
       <div className="w-[375px] p-6 bg-[#ffffff] rounded-lg shadow">
         <div className="text-left">
-          <h1 className="text-[32px] font-[600] leading-[40px] font-sans text-[#101010]">
+          <h1 className="text-[32px] font-[600] leading-[40px] font-inter text-[#101010]">
             Login to your account.
           </h1>
           <p className="text-[14px] font-medium leading-[20px] font-sans text-[#878787] mt-2">

@@ -16,7 +16,6 @@ const Home = () => {
   const handleLogout = async () => {
     setUser(null)
     window.localStorage.removeItem('loggedUser')
-    googleLogout()
     navigate('/sign-in')
   }
 
