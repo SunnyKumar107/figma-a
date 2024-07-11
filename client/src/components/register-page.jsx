@@ -50,36 +50,40 @@ export default function Register() {
   }
 
   return (
-    <main className="min-h-screen flex justify-center md:py-2 bg-[#F9FAFB]">
-      <div className="w-full md:w-[375px] px-6 py-10 md:py-6 bg-[#FFFFFF] rounded-lg shadow">
-        <div className="max-w-[320px]">
-          <h1 className="text-4xl font-bold">Create your new account.</h1>
-          <p className="text-sm text-gray-500 mt-2">
+    <main className="min-h-screen flex items-center justify-center p-2 bg-[#F9FAFB]">
+      <div className="w-[375px] p-6 bg-[#FFFFFF] rounded-lg shadow">
+        <div className="text-left">
+          <h1 className="text-[32px] font-[600] leading-[40px] font-sans text-[#101010]">
+            Create your new account.
+          </h1>
+          <p className="text-[14px] font-medium leading-[20px] font-sans text-[#878787] mt-2">
             Create an account to start looking for the food you like
           </p>
         </div>
         <form onSubmit={handleRegister} className="mt-8 flex flex-col gap-4">
-          <div className="flex flex-col gap-1">
-            <label htmlFor="email">Email Address</label>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="email" className="text-[#101010]">
+              Email Address
+            </label>
             <input
               type="email"
               id="email"
               name="email"
               placeholder="Enter Email"
-              className="border border-gray-200 rounded-lg p-4 text-sm"
+              className="border-[1px] border-[#D6D6D6] rounded-lg p-4 text-sm font-medium leading-[20px] text-[#101010]"
             />
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-2">
             <label htmlFor="name">User Name</label>
             <input
               type="name"
               id="name"
               name="name"
               placeholder="Enter Name"
-              className="border border-gray-200 rounded-lg p-4 text-sm"
+              className="border-[1px] border-[#D6D6D6] rounded-lg p-4 text-sm font-medium leading-[20px] text-[#101010]"
             />
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-2">
             <label htmlFor="password">Password</label>
             <div className="relative">
               <input
@@ -87,20 +91,24 @@ export default function Register() {
                 id="password"
                 name="password"
                 placeholder="Password"
-                className="border border-gray-200 rounded-lg p-4 text-sm w-full"
+                className="w-full border-[1px] border-[#D6D6D6] rounded-lg p-4 text-sm font-medium leading-[20px] text-[#101010]"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-2 top-2.5"
+                className="absolute right-4 top-[18px] text-[#101010] hover:text-[#101010]/80"
               >
-                {showPassword ? <FaEye size={18} /> : <FaEyeSlash size={18} />}
+                {showPassword ? <FaEye size={20} /> : <FaEyeSlash size={20} />}
               </button>
             </div>
           </div>
-          <div className="max-w-[320px] flex">
+          <div className="mb-2 flex">
             <div className="">
-              <input type="checkbox" className="mr-4 border-2 " required />
+              <input
+                type="checkbox"
+                className="accent-[#FE8C00] h-[20px] w-[20px] rounded mr-2"
+                required
+              />
             </div>
             <p className="text-sm font-medium text-slate-700">
               I Agree with{' '}
@@ -116,7 +124,7 @@ export default function Register() {
           )}
           <button
             type="submit"
-            className="bg-[#FE8C00] text-white rounded-full p-4 text-sm font-semibold hover:bg-[#FE8C00]/80"
+            className="bg-[#FE8C00] text-white rounded-[100px] p-4 text-sm font-semibold hover:bg-[#FE8C00]/80 h-[52px]"
           >
             {pending ? (
               <LuLoader2 size={20} className="animate-spin m-auto" />
@@ -125,8 +133,10 @@ export default function Register() {
             )}
           </button>
         </form>
-        <div className="my-4 flex justify-center">
-          <p className="text-sm text-gray-500">Or sign in with</p>
+        <div className="my-6 flex justify-center items-center space-x-4">
+          <div className="w-[99.5px] h-[0.5px] bg-[#878787]"></div>
+          <p className="text-sm text-[#878787]">Or sign in with</p>
+          <div className="w-[99.5px] h-[0.5px] bg-[#878787]"></div>
         </div>
         <div className="flex justify-center">
           <GoogleLogin
@@ -139,12 +149,12 @@ export default function Register() {
             }}
           />
         </div>
-        <div className="text-center mt-6">
-          <p className="text-sm">
+        <div className="text-center mt-8">
+          <p className="text-sm font-medium text-[#101010]">
             Have an account?{' '}
             <NavLink
               to={'/sign-in'}
-              className="text-[#FE8C00] hover:text-[#FE8C00]/80 font-medium"
+              className="text-[#FE8C00] hover:text-[#FE8C00]/80 font-semibold"
             >
               Sign in
             </NavLink>

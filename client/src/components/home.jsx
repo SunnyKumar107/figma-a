@@ -1,17 +1,15 @@
-import { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { userContext } from '../context/context'
 import { useNavigate } from 'react-router-dom'
-import { googleLogout } from '@react-oauth/google'
 
-export default function Home() {
+const Home = () => {
   const { user, setUser } = useContext(userContext)
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (!user) {
-      navigate('/sign-in')
-    }
-  }, [])
+  if (!user) {
+    navigate('/sign-in')
+    return
+  }
 
   const handleLogout = async () => {
     setUser(null)
@@ -19,8 +17,6 @@ export default function Home() {
     googleLogout()
     navigate('/sign-in')
   }
-
-  if (!user) return null
 
   return (
     <div className="flex flex-col gap-1 items-center">
@@ -37,3 +33,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default Home
