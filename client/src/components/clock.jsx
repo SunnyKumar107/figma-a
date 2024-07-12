@@ -5,12 +5,17 @@ const Clock = () => {
   const minuteRef = useRef()
   const secondRef = useRef()
 
-  setInterval(() => {
-    const date = new Date()
+  const startingMinutes = 120
+  let totalSeconds = startingMinutes * 60
 
-    const hours = date.getHours()
-    const minutes = date.getMinutes()
-    const seconds = date.getSeconds()
+  let hours = 0
+  let minutes = 0
+  let seconds = 0
+
+  setInterval(() => {
+    seconds = totalSeconds % 60
+    minutes = Math.floor(totalSeconds / 60)
+    hours = Math.floor(totalSeconds / 3600)
 
     const hourDeg = 30 * hours + minutes / 2
     const minuteDeg = 6 * minutes
@@ -19,6 +24,8 @@ const Clock = () => {
     hourRef.current.style.transform = `rotate(${hourDeg}deg)`
     minuteRef.current.style.transform = `rotate(${minuteDeg}deg)`
     secondRef.current.style.transform = `rotate(${secondDeg}deg)`
+
+    totalSeconds--
   }, 1000)
 
   return (

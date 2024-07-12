@@ -18,7 +18,7 @@ export default function Register() {
     if (user) {
       navigate('/')
     }
-  }, [])
+  }, [user])
 
   const showError = (msg) => {
     setError(msg)
@@ -71,6 +71,7 @@ export default function Register() {
               name="email"
               placeholder="Enter Email"
               className="border-[1px] border-[#D6D6D6] rounded-lg p-4 text-sm font-medium leading-[20px] text-[#101010]"
+              required
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -81,6 +82,7 @@ export default function Register() {
               name="name"
               placeholder="Enter Name"
               className="border-[1px] border-[#D6D6D6] rounded-lg p-4 text-sm font-medium leading-[20px] text-[#101010]"
+              required
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -92,6 +94,7 @@ export default function Register() {
                 name="password"
                 placeholder="Password"
                 className="w-full border-[1px] border-[#D6D6D6] rounded-lg p-4 text-sm font-medium leading-[20px] text-[#101010]"
+                required
               />
               <button
                 type="button"
