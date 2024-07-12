@@ -6,6 +6,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import usersService from '../services/users'
 import { userContext } from '../context/context'
 import { RiErrorWarningLine } from 'react-icons/ri'
+import { jwtDecode } from 'jwt-decode'
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false)
@@ -145,7 +146,21 @@ export default function Register() {
           <GoogleLogin
             shape="circle"
             onSuccess={(credentialResponse) => {
-              console.log(credentialResponse)
+              const decoded = jwtDecode(credentialResponse.credential)
+              setUser({
+                email: decoded.email,
+                name: decoded.name,
+                token: credentialResponse.credential
+              })
+              window.localStorage.setItem(
+                'loggedUser',
+                JSON.stringify({
+                  email: decoded.email,
+                  name: decoded.name,
+                  token: credentialResponse.credential
+                })
+              )
+              navigate('/')
             }}
             onError={() => {
               console.log('Login Failed')

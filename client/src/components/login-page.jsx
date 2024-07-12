@@ -133,6 +133,14 @@ export default function LoginPage() {
                 name: decoded.name,
                 token: credentialResponse.credential
               })
+              window.localStorage.setItem(
+                'loggedUser',
+                JSON.stringify({
+                  email: decoded.email,
+                  name: decoded.name,
+                  token: credentialResponse.credential
+                })
+              )
               navigate('/')
             }}
             onError={() => {
