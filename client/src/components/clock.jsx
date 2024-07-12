@@ -25,6 +25,7 @@ const Clock = ({ currentTime, speed }) => {
     const minuteDeg = 6 * minutes
     const secondDeg = 6 * seconds
 
+    if (!hourRef.current || !minuteRef.current || !secondRef.current) return
     hourRef.current.style.transform = `rotate(${hourDeg}deg)`
     minuteRef.current.style.transform = `rotate(${minuteDeg}deg)`
     secondRef.current.style.transform = `rotate(${secondDeg}deg)`
