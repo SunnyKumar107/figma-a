@@ -14,6 +14,7 @@ const Clock = ({ currentTime, speed }) => {
   let time = currentTime
   let totalSeconds = Number(time / 1000)
 
+  console.log(currentTime.getMinutes())
   setInterval(() => {
     if (stop) return
 
@@ -32,7 +33,6 @@ const Clock = ({ currentTime, speed }) => {
 
     totalSeconds--
     time = new Date(totalSeconds * 1000)
-    currentTime = new Date(totalSeconds * 1000)
   }, 1000 / speed)
 
   return (

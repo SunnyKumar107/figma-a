@@ -4,18 +4,20 @@ import { userContext } from '../context/context'
 import { useNavigate } from 'react-router-dom'
 
 export default function TrackingScreen() {
-  let currentTime = new Date()
+  const [currentTime, setCurrentTime] = useState(null)
 
   const [speed, setSpeed] = useState(1)
   const { user } = useContext(userContext)
   const navigate = useNavigate()
 
   useEffect(() => {
+    setCurrentTime(new Date())
     if (!user) {
       navigate('/sign-in')
     }
   }, [])
 
+  if (!currentTime) return null
   return (
     <div className="w-full min-h-screen flex flex-col items-center p-6 bg-[#ffffff]">
       <Clock currentTime={currentTime} speed={speed} />
