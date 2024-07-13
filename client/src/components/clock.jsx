@@ -1,11 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 
 const Clock = ({ currentTime, speed }) => {
-  const [stop, setStop] = useState(false)
-
-  setTimeout(() => {
-    setStop(true)
-  }, 1000 * 60 * 120)
+  if (!currentTime) return null
 
   const hourRef = useRef()
   const minuteRef = useRef()
@@ -14,10 +10,7 @@ const Clock = ({ currentTime, speed }) => {
   let time = currentTime
   let totalSeconds = Number(time / 1000)
 
-  console.log(currentTime.getMinutes())
-  setInterval(() => {
-    if (stop) return
-
+  const interval = setInterval(() => {
     const hours = time.getHours()
     const minutes = time.getMinutes()
     const seconds = time.getSeconds()
@@ -34,6 +27,10 @@ const Clock = ({ currentTime, speed }) => {
     totalSeconds--
     time = new Date(totalSeconds * 1000)
   }, 1000 / speed)
+
+  setTimeout(() => {
+    clearInterval(interval)
+  }, 1000 * 60 * 120)
 
   return (
     <div

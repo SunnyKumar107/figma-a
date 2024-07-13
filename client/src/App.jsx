@@ -26,7 +26,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/sign-in" element={<LoginPage />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/tracking-screen" element={<TrackingScreen />} />
+          <Route path="/tracking-screen" Component={TrackingScreen} />
         </Routes>
       </userContext.Provider>
     </Router>
