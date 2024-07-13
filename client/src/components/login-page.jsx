@@ -64,7 +64,10 @@ export default function LoginPage() {
         </div>
         <form onSubmit={handleLogin} className="mt-8 flex flex-col gap-4">
           <div className="flex flex-col gap-2">
-            <label htmlFor="email" className="text-[#101010]">
+            <label
+              htmlFor="email"
+              className="text-[#101010] text-sm font-inter font-[500] leading-[20px]"
+            >
               Email Address
             </label>
             <input
@@ -77,7 +80,10 @@ export default function LoginPage() {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label htmlFor="password" className="text-[#101010]">
+            <label
+              htmlFor="password"
+              className="text-[#101010] text-sm font-inter font-[500] leading-[20px]"
+            >
               Password
             </label>
             <div className="relative">
@@ -120,7 +126,9 @@ export default function LoginPage() {
         </form>
         <div className="my-6 flex justify-center items-center space-x-4">
           <div className="w-[99.5px] h-[0.5px] bg-[#878787]"></div>
-          <p className="text-sm text-[#878787]">Or sign in with</p>
+          <p className="text-sm text-[#878787] font-medium font-inter leading-[20px]">
+            Or sign in with
+          </p>
           <div className="w-[99.5px] h-[0.5px] bg-[#878787]"></div>
         </div>
         <div className="flex justify-center">
