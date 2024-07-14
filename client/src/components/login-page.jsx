@@ -42,7 +42,6 @@ export default function LoginPage() {
 
     if (res.success) {
       setUser(res.user)
-      usersService.setToken(res.user.token)
       window.localStorage.setItem('loggedUser', JSON.stringify(res.user))
       navigate('/')
       return
@@ -152,7 +151,7 @@ export default function LoginPage() {
               navigate('/')
             }}
             onError={() => {
-              console.log('Login Failed')
+              throw new Error('Login Failed')
             }}
           />
         </div>

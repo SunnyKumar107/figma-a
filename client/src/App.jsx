@@ -3,7 +3,6 @@ import LoginPage from './components/login-page'
 import { userContext } from './context/context'
 import { useEffect, useState } from 'react'
 import Register from './components/register-page'
-import usersService from './services/users'
 import Home from './components/home'
 import TrackingScreen from './components/tracking-screen'
 
@@ -15,7 +14,6 @@ export default function App() {
     if (user) {
       const loginUser = JSON.parse(user)
       setUser(loginUser)
-      usersService.setToken(loginUser.token)
     }
   }, [])
 

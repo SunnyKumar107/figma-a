@@ -78,22 +78,13 @@ usersRouter.post('/', async (request, response, next) => {
   }
 })
 
-usersRouter.delete(
-  '/:id',
-  middleware.userExtractor,
-  async (request, response, next) => {
-    try {
-      const user = request.user
-      if (user) {
-        await User.findByIdAndRemove(request.params.id)
-        response.status(204).end()
-      } else {
-        response.status(404).end()
-      }
-    } catch (exception) {
-      next(exception)
-    }
+usersRouter.delete('/:id', async (request, response, next) => {
+  try {
+    await User.findByIdAndRemove(request.params.id)
+    response.status(204).end()
+  } catch (exception) {
+    next(exception)
   }
-)
+})
 
 module.exports = usersRouter
