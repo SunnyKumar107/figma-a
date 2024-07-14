@@ -2,10 +2,9 @@ const usersRouter = require('express').Router()
 
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
-const middleware = require('../utils/middleware')
 const jwt = require('jsonwebtoken')
 
-usersRouter.get('/', async (request, response) => {
+usersRouter.get('/', async (request, response, next) => {
   try {
     const users = await User.find({})
     response.status(200).json(users)

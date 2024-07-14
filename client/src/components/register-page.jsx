@@ -1,5 +1,5 @@
 import { GoogleLogin } from '@react-oauth/google'
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { LuLoader2 } from 'react-icons/lu'
 import { NavLink, useNavigate } from 'react-router-dom'
@@ -19,7 +19,7 @@ export default function Register() {
     if (user) {
       navigate('/')
     }
-  }, [user])
+  }, [user, navigate])
 
   const showError = (msg) => {
     setError(msg)

@@ -1,7 +1,6 @@
-import React, { useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { userContext } from '../context/context'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { FaCheck } from 'react-icons/fa'
 
 const Home = () => {
   const { user, setUser } = useContext(userContext)
@@ -11,7 +10,7 @@ const Home = () => {
     if (!user) {
       navigate('/sign-in')
     }
-  }, [])
+  }, [user, navigate])
 
   const handleLogout = async () => {
     setUser(null)

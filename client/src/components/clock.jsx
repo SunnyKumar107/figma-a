@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 
 const Clock = ({ currentTime, speed }) => {
   if (!currentTime) return null

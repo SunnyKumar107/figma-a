@@ -20,7 +20,7 @@ mongoose
     info('connected to MongoDB')
   })
   .catch((err) => {
-    error('error connecting to MongoDB:', error.message)
+    error('error connecting to MongoDB:', err.message)
   })
 
 app.get('/', (request, response) => {

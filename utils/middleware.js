@@ -1,5 +1,3 @@
-const User = require('../models/user')
-const jwt = require('jsonwebtoken')
 const logger = require('./logger')
 
 const errorHandler = (error, request, response, next) => {
@@ -31,7 +29,5 @@ const unknownEndpoint = (request, response) => {
 
 module.exports = {
   errorHandler,
-  unknownEndpoint,
-  tokenExtractor,
-  userExtractor
+  unknownEndpoint
 }

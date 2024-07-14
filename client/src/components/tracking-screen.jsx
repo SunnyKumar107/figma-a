@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Clock from './clock'
 import { userContext } from '../context/context'
 import { NavLink, useNavigate } from 'react-router-dom'
@@ -49,7 +49,7 @@ export default function TrackingScreen() {
     if (!user) {
       navigate('/sign-in')
     }
-  }, [])
+  }, [user, navigate])
 
   const generateShareUrl = (speedVal) => {
     const baseUrl = window.location.origin + window.location.pathname

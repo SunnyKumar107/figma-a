@@ -4,7 +4,6 @@ import { GoogleLogin } from '@react-oauth/google'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { userContext } from '../context/context'
 import loginService from '../services/auth'
-import usersService from '../services/users'
 import { LuLoader2 } from 'react-icons/lu'
 import { jwtDecode } from 'jwt-decode'
 import { RiErrorWarningLine } from 'react-icons/ri'
@@ -20,7 +19,7 @@ export default function LoginPage() {
     if (user) {
       navigate('/')
     }
-  }, [user])
+  }, [user, navigate])
 
   const showError = (msg) => {
     setError(msg)
@@ -157,7 +156,7 @@ export default function LoginPage() {
         </div>
         <div className="text-center mt-8">
           <p className="text-sm font-medium text-[#101010]">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <NavLink
               to={'/register'}
               className="text-[#FE8C00] hover:text-[#FE8C00]/80 font-semibold"
