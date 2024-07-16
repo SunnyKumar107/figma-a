@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = 'https://figma-a.onrender.com/api/users'
+const baseUrl = `${import.meta.env.VITE_BASE_URL}/api/users`
 
 const register = async (user) => {
   try {

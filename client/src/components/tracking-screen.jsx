@@ -75,7 +75,7 @@ export default function TrackingScreen() {
         finishTime={finishTime}
       />
       <div className="my-4 flex flex-col items-center gap-4">
-        <h1 className="text-3xl font-semibold text-[#878787]">{speed}</h1>
+        <h1 className="text-3xl font-semibold text-[#878787]">{speed}x</h1>
         <input
           name="slider"
           type="range"
@@ -88,17 +88,23 @@ export default function TrackingScreen() {
         />
         <p className="text-[#878787] text-sm font-medium ">Control Speed</p>
       </div>
-      <div className="w-full max-w-[400px] min-h-[100px] mt-4 shadow-[0_0_3px_0_#878787] rounded-lg px-4 py-2 ">
-        <p className="text-[#878787] text-sm text-center font-inter font-semibold">
-          {quote?.category}
-        </p>
-        <h3 className="text-[#101010] text-lg font-inter font-medium text-justify my-2">
-          {quote?.quote}
-        </h3>
-        <p className="text-[#fe8c00] text-sm font-bold font-inter text-end">
-          {quote?.author}
-        </p>
-      </div>
+      {quote ? (
+        <div className="w-full max-w-[400px] min-h-[100px] mt-4 shadow-[0_0_2px_0_#878787] rounded-lg px-4 py-2 ">
+          <p className="text-[#878787] text-sm text-center font-inter font-semibold uppercase">
+            {quote.category}
+          </p>
+          <h3 className="text-[#101010] text-lg font-inter font-medium text-justify my-2">
+            {quote.quote}
+          </h3>
+          <p className="text-[#fe8c00] text-sm font-bold font-inter text-end">
+            {quote.author}
+          </p>
+        </div>
+      ) : (
+        <div className="w-full max-w-[400px] min-h-[100px] mt-4 shadow-[0_0_2px_0_#878787] rounded-lg px-4 py-2 ">
+          <div className="w-full h-[100px] bg-[#e4e4e4] rounded-lg"></div>
+        </div>
+      )}
       <button
         onClick={handleShare}
         className="bg-[#FE8C00] w-full max-w-[400px] mt-8 text-center font-inter text-white rounded-[100px] p-4 text-sm font-semibold hover:bg-[#FE8C00]/80 h-[52px]"

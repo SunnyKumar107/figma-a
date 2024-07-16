@@ -8,7 +8,7 @@ const Clock = ({ currentTime, speed, onCurrentTimeChange, finishTime }) => {
   let totalSeconds = Number(currentTime / 1000)
 
   useEffect(() => {
-    if (currentTime <= finishTime) return null
+    if (currentTime <= finishTime) return
 
     const interval = setInterval(() => {
       const hours = currentTime.getHours()

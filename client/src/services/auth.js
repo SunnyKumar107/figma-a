@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = 'https://figma-a.onrender.com/api/login'
+const baseUrl = `${import.meta.env.VITE_BASE_URL}/api/login`
 
 const login = async (credentials) => {
   try {
