@@ -24,10 +24,11 @@ const Home = () => {
           <div className="w-[58.13px] h-[4px] bg-[#878787] rounded-[11px]"></div>
         </div>
         <div className="flex flex-col items-center justify-center mt-8">
-          <div
+          <img
+            src="/Illustration_Success.png"
+            alt="success"
             className="w-[202.62px] h-[168px]"
-            style={{ backgroundImage: 'url(/Illustration_Success.png)' }}
-          ></div>
+          />
           <h1 className="text-[#101010] font-semibold text-2xl mt-8 font-inter text-center">
             Login Successful
           </h1>
