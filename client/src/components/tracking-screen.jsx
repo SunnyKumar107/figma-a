@@ -1,16 +1,15 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Clock from './clock'
-import { userContext } from '../context/context'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import quotesService from '../services/quotes'
 import { FaArrowLeft } from 'react-icons/fa6'
 
 export default function TrackingScreen() {
   const [currentTime, setCurrentTime] = useState(null)
+  const [finishTime, setFinishTime] = useState(null)
   const [quote, setQuote] = useState(null)
   const [speed, setSpeed] = useState(1)
-  const { user } = useContext(userContext)
-  const navigate = useNavigate()
+  const [copied, setCopied] = useState(false)
 
   const category = [
     'computers',
@@ -27,6 +26,7 @@ export default function TrackingScreen() {
 
   useEffect(() => {
     setCurrentTime(new Date())
+    setFinishTime(new Date(new Date().getTime() - 2 * 60 * 60 * 1000))
 
     const fetchQuote = async () => {
       const newQuote = await quotesService.getQuote()
@@ -45,11 +45,7 @@ export default function TrackingScreen() {
     const savedSpeed = params.get('speed')
 
     if (savedSpeed) setSpeed(Number(savedSpeed))
-
-    if (!user) {
-      navigate('/sign-in')
-    }
-  }, [user, navigate])
+  }, [])
 
   const generateShareUrl = (speedVal) => {
     const baseUrl = window.location.origin + window.location.pathname
@@ -58,14 +54,26 @@ export default function TrackingScreen() {
   }
 
   const handleShare = () => {
+    setCopied(true)
     const shareUrl = generateShareUrl(speed)
 
     navigator.clipboard.writeText(shareUrl)
+
+    setTimeout(() => {
+      setCopied(false)
+    }, 3000)
   }
+
+  if (!currentTime || !finishTime) return null
 
   return (
     <div className="w-full min-h-screen flex flex-col items-center p-6 bg-[#ffffff]">
-      <Clock currentTime={currentTime} speed={speed} />
+      <Clock
+        currentTime={currentTime}
+        onCurrentTimeChange={(sec) => setCurrentTime(new Date(sec))}
+        speed={speed}
+        finishTime={finishTime}
+      />
       <div className="my-4 flex flex-col items-center gap-4">
         <h1 className="text-3xl font-semibold text-[#878787]">{speed}</h1>
         <input
@@ -95,7 +103,7 @@ export default function TrackingScreen() {
         onClick={handleShare}
         className="bg-[#FE8C00] w-full max-w-[400px] mt-8 text-center font-inter text-white rounded-[100px] p-4 text-sm font-semibold hover:bg-[#FE8C00]/80 h-[52px]"
       >
-        Share URL
+        {copied ? 'Copied!' : 'Share URL'}
       </button>
       <div>
         <NavLink

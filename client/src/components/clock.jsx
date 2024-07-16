@@ -1,36 +1,35 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
-const Clock = ({ currentTime, speed }) => {
-  if (!currentTime) return null
-
+const Clock = ({ currentTime, speed, onCurrentTimeChange, finishTime }) => {
   const hourRef = useRef()
   const minuteRef = useRef()
   const secondRef = useRef()
 
-  let time = currentTime
-  let totalSeconds = Number(time / 1000)
+  let totalSeconds = Number(currentTime / 1000)
 
-  const interval = setInterval(() => {
-    const hours = time.getHours()
-    const minutes = time.getMinutes()
-    const seconds = time.getSeconds()
+  useEffect(() => {
+    if (currentTime <= finishTime) return null
 
-    const hourDeg = 30 * hours + minutes / 2
-    const minuteDeg = 6 * minutes
-    const secondDeg = 6 * seconds
+    const interval = setInterval(() => {
+      const hours = currentTime.getHours()
+      const minutes = currentTime.getMinutes()
+      const seconds = currentTime.getSeconds()
 
-    if (!hourRef.current || !minuteRef.current || !secondRef.current) return
-    hourRef.current.style.transform = `rotate(${hourDeg}deg)`
-    minuteRef.current.style.transform = `rotate(${minuteDeg}deg)`
-    secondRef.current.style.transform = `rotate(${secondDeg}deg)`
+      const hourDeg = 30 * hours + minutes / 2
+      const minuteDeg = 6 * minutes
+      const secondDeg = 6 * seconds
 
-    totalSeconds--
-    time = new Date(totalSeconds * 1000)
-  }, 1000 / speed)
+      if (!hourRef.current || !minuteRef.current || !secondRef.current) return
+      hourRef.current.style.transform = `rotate(${hourDeg}deg)`
+      minuteRef.current.style.transform = `rotate(${minuteDeg}deg)`
+      secondRef.current.style.transform = `rotate(${secondDeg}deg)`
 
-  setTimeout(() => {
-    clearInterval(interval)
-  }, 1000 * 60 * 120)
+      totalSeconds--
+      onCurrentTimeChange(totalSeconds * 1000)
+    }, 1000 / speed)
+
+    return () => clearInterval(interval)
+  }, [currentTime, speed, finishTime])
 
   return (
     <div

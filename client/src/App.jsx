@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import LoginPage from './components/login-page'
 import { userContext } from './context/context'
 import { useEffect, useState } from 'react'
@@ -8,17 +8,20 @@ import TrackingScreen from './components/tracking-screen'
 
 export default function App() {
   const [user, setUser] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const user = localStorage.getItem('loggedUser')
     if (user) {
       const loginUser = JSON.parse(user)
       setUser(loginUser)
+    } else {
+      navigate('/sign-in')
     }
   }, [])
 
   return (
-    <Router>
+    <>
       <userContext.Provider value={{ user, setUser }}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -27,6 +30,6 @@ export default function App() {
           <Route path="/tracking-screen" Component={TrackingScreen} />
         </Routes>
       </userContext.Provider>
-    </Router>
+    </>
   )
 }
