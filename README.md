@@ -1,5 +1,3 @@
-# Project Name
-
 ## Description
 This project is a web application that provides a unique user experience with a countdown clock and customizable speed settings. It includes robust login and authentication features and allows users to share their current clock and slider settings with others.
 
@@ -17,12 +15,12 @@ This project is a web application that provides a unique user experience with a 
 
 1. **Clone the repository:**
     ```sh
-    git clone https://github.com/yourusername/project-name.git
+    git clone https://github.com/SunnyKumar107/figma-a.git
     ```
 
 2. **Navigate to the project directory:**
     ```sh
-    cd project-name
+    cd figma-a
     ```
 
 3. **Install dependencies:**
